@@ -13,5 +13,28 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDrtGGTF-z7nvjV7HkDE_nv2lB66_rXgkw",
+        authDomain: "techmenta-site.firebaseapp.com",
+        projectId: "techmenta-site",
+        storageBucket: "techmenta-site.appspot.com",
+        messagingSenderId: "313538870857",
+        appId: "1:313538870857:web:afe7ee19b695641b534998",
+        measurementId: "G-NSCNJHKJF9"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
   </body>
 </html>
