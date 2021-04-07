@@ -2,14 +2,13 @@
   <div class="nav-bar">
     <div class="container grid">
       <div class="logo-wrapper">
-        <h1>TechMenta</h1>
+        <h1 class="logo">TechMentā</h1>
       </div>
       <div class="search-wrapper">
         <input type="text" class="search-bar" placeholder="Search for mentors or questions">
       </div>
       <div class="links-wrapper">
         <button>Log in</button>
-        <button>Sign up</button>
       </div>
     </div>
   </div>
@@ -47,10 +46,11 @@
   }
 }
 
-h1 {
+.logo {
   font-size: 20px;
   color: var(--text-color);
   font-weight: var(--medium);
+  cursor: pointer;
 }
 
 .search-wrapper{

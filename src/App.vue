@@ -1,9 +1,16 @@
 <template>
   <header>
-    <nav-bar></nav-bar>
+    <top-bar></top-bar>
   </header>
   <main>
-    <home-view></home-view>
+    <main-col-grid>
+      <template #lhs>
+        <nav-bar></nav-bar>
+      </template>
+      <template #feed>
+        <home-view></home-view>
+      </template>
+    </main-col-grid>
   </main>
 </template>
 
@@ -14,35 +21,27 @@ export default {
 </script>
 
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-:root {
+:root{
   --blue: #384cfc;
   --green: #01e64d;
   --red: #d41a23;
   --orange: #f16c13;
-  --white: #ffffff;
-  --black: #0b0e11;
 
-  --font: 'Poppins',sans-serif;
+  --font: "Poppins", sans-serif;
 
   --light: 300;
-  --regular:400;
+  --regular: 400;
   --medium: 500;
   --semibold: 600;
-  --bold :700;
+  --bold: 700;
 
-  --text-color: var(--white);
-  --text-color-alt : var(--black);
+  --danger-color: var(--red);
+  --success-color: var(--green);
+  --warning-color: var(--orange);
 
-  --background-color : var(--black);
-  --background-color-alt : var(--white);
-
-  --danger-color : var(--red);
-  --success-color : var(--green);
-  --warning-color : var(--orange);
-
+  --primary-color-000: #ffffff;
   --primary-color-100: #dee3ea;
   --primary-color-200: #b2bdcd;
   --primary-color-300: #5d7290;
@@ -51,10 +50,21 @@ export default {
   --primary-color-800: #151a21;
   --primary-color-900: #0b0e11;
 
+  --text-color: var(--primary-color-000);
+  --text-color-alt: var(--primary-color-900);
+  --background-color: var(--primary-color-900);
+  --background-color-alt: var(--primary-color-000);
 
-  --accent-color-900 : var(--blue);
-
-
+  --accent-color-000: #fafafa;
+  --accent-color-100: #c6c8d8;
+  --accent-color-200: #daddf5;
+  --accent-color-300: #c2c7f3;
+  --accent-color-400: #a0a8f0;
+  --accent-color-500: #8c97fa;
+  --accent-color-600: #6f7dfa;
+  --accent-color-700: #4d5ffd;
+  --accent-color-800: #4e5fff;
+  --accent-color-900: #384cfc;
 }
 
 .container {
@@ -66,7 +76,7 @@ export default {
   display: flex;
 }
 
-.subtitle{
+.subtitle {
   font-size: 20px;
   font-weight: var(--semibold);
 }
@@ -76,7 +86,7 @@ body {
   padding: 0px;
   background: var(--background-color);
   font-family: var(--font);
-  color: var(--text-color)
+  color: var(--text-color);
 }
 
 main {
@@ -105,12 +115,11 @@ button {
   padding: 10px 25px;
   background: var(--accent-color-900);
   font-family: var(--font);
-  color: var(--text-color);
+  color: #ffffff;
   border: none;
   outline: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: var(--semibold);
 }
-
 </style>
