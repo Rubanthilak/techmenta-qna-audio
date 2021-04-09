@@ -4,7 +4,7 @@
         <nav-bar></nav-bar>
       </template>
       <template #feed>
-        <home-view></home-view>
+        <feed-list></feed-list>
       </template>
     </main-col-grid>
 </template>

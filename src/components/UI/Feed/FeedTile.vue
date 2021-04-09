@@ -1,16 +1,19 @@
 <template>
   <div class="flex feed-tile">
-    <p class="ques">{{tileData.question}}</p>
+    <p class="ques">{{tileData.title}}</p>
     <div class="flex ques-details">
       <div class="flex user-details">
-        <div class="profile-img"></div>
-        <p>{{tileData.username}}</p>
+        <p>{{tileData.userDisplayName}}</p>
       </div>
       <div class="divider">|</div>
       <div>
         <p class="timestamp">
-          <span>Asked on </span> {{tileData.createdOn}}
+          <span>Asked on </span> {{tileData.timestamp}}
         </p>
+      </div>
+      <div class="divider">|</div>
+      <div>
+        <p><span>{{tileData.totalVotes}}</span> Votes</p>
       </div>
     </div>
   </div>
