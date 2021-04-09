@@ -3,7 +3,7 @@
     <p class="ques">{{tileData.title}}</p>
     <div class="flex ques-details">
       <div class="flex user-details">
-        <p>{{tileData.userDisplayName}}</p>
+        <p>{{tileData.username}}</p>
       </div>
       <div class="divider">|</div>
       <div>

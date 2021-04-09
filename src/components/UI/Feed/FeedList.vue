@@ -2,11 +2,15 @@
   <div class="home">
     <div class="flex feed-header">
       <p class="subtitle">Top Questions</p>
-      <button>Ask Question</button>
+      <router-link to="/post">
+        <button>Ask Question</button>
+      </router-link>
     </div>
     <div class="flex feed-content">
       <div v-for="feed in feedList" :key="feed">
-        <feed-tile :tileData="feed"></feed-tile>
+        <router-link :to="'/post/'+feed.docid">
+            <feed-tile :tileData="feed"></feed-tile>
+        </router-link>
       </div>
     </div>
   </div>

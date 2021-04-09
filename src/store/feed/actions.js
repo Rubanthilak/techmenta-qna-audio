@@ -40,6 +40,8 @@ export default {
         querySnapshot.forEach((doc) => {
             let temp = doc.data();
             temp.timestamp = formatDate(temp.timestamp);
+            temp.docid = doc.id;
+            temp.userid = doc.ref.path.split("/")[1];
             list.push(temp);
         });
         context.commit("setFeedList",{

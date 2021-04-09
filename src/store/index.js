@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import authModule from './auth/index.js'
 import feedModule from './feed/index.js'
-import firebase from "../firebase/firebase";
+import firebase from "../firebase/firebase.js";
 
 const store = createStore({
     modules: {
@@ -11,7 +11,8 @@ const store = createStore({
     state : {
         firestore : firebase.db,
         firebaseStorage: firebase.storage,
-        firebaseAuth: firebase.auth
+        firebaseAuth: firebase.auth,
+        firebase: firebase.firebase
     },
     getters : {
         firestore (state) {
@@ -22,6 +23,9 @@ const store = createStore({
         },
         firebaseAuth (state) {
             return state.firebaseAuth;
+        },
+        firebase (state){
+            return state.firebase
         }
     }
 });

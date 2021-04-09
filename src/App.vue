@@ -2,7 +2,7 @@
   <header>
     <top-bar v-if="isAuthenticated"></top-bar>
   </header>
-  <main>
+  <main class="container">
     <router-view></router-view>
   </main>
 </template>
@@ -20,7 +20,6 @@ export default {
       this.$store.dispatch("fetchUser", user);
     });
   },
-  
 };
 </script>
 

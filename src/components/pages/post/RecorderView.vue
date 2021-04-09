@@ -1,12 +1,9 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <h2>Add Audio</h2>
+    <div>
       <audio v-if="newAudio" :src="newAudioURL" controls></audio>
       <button v-if="!recorder" @click="record()">Record</button>
       <button v-else @click="stop()">Stop</button>
     </div>
-  </div>
 </template>
 
 <script>
@@ -57,14 +54,6 @@ export default {
 
 <style lang="scss" scoped>
 
-.card {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  padding: 25px;
-  background: var(--primary-color-800);
-  border-radius: 10px;
-}
 
 h2{
     margin-bottom: 10px;
@@ -72,6 +61,8 @@ h2{
 
 audio{
     margin-bottom: 25px;
+    outline: none;
+    border: none;
 }
 
 </style>

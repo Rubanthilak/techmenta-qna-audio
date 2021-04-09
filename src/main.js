@@ -13,6 +13,7 @@ import FeedList from "./components/ui/feed/FeedList.vue";
 import LoginView from "./components/pages/auth/LoginView.vue";
 import CreatePostView from "./components/pages/post/CreatePostView.vue"
 import RecorderView from "./components/pages/post/RecorderView.vue"
+import PostDetailsView from "./components/pages/post/PostDetailsView.vue"
 
 //Layouts
 import MainColumnGrid from "./components/layout/MainColumnGrid";
@@ -33,6 +34,7 @@ app.component("feed-list",FeedList);
 //Pages
 app.component("login-view",LoginView);
 app.component("create-post-view",CreatePostView);
+app.component("post-details-view",PostDetailsView);
 app.component("recorder-view",RecorderView);
 
 //Layouts
