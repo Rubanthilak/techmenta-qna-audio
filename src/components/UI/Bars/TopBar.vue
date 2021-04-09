@@ -8,11 +8,27 @@
         <input type="text" class="search-bar" placeholder="Search for mentors or questions">
       </div>
       <div class="links-wrapper">
-        <button>Log in</button>
+        <button @click="logout">Log out</button>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods : {
+    async logout(){
+      try{
+        await this.$store.dispatch("logout");
+        this.$router.replace("/auth");
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .nav-bar {

@@ -2,13 +2,14 @@
   <div class="container">
     <div class="card">
       <h2>Welcome</h2>
-      <p>
+      <p class="subs">
           By logging in you accept our <span>Privacy Policy</span> and 
           <span>Terms of Service</span>.
       </p>
       <form @submit.prevent="validateCredentials" class="login-form flex">
         <input type="email" v-model="email" placeholder="Email"/>
         <input type="password" v-model="password" placeholder="Password"/>
+        <p class="error-msg" v-if="errorMessage">{{errorMessage}}</p>
         <button type="submit">Login</button>
       </form>
     </div>
@@ -21,6 +22,7 @@ export default {
     return {
       email: null,
       password: null,
+      errorMessage: null
     };
   },
   methods: {
@@ -37,7 +39,7 @@ export default {
           this.$router.replace("/");
         }
         catch(err){
-          console.log(err);
+          this.errorMessage = err.message;
         }
       }
     },
@@ -46,6 +48,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.error-msg{
+  color: var(--red);
+  margin-top: 0px;
+  margin-bottom:10px;
+  max-width: 350px;
+  font-size: 12px;
+}
 
 .container{
   display: flex;
@@ -60,7 +70,7 @@ export default {
   display: inline-block;
   border-radius: 8px;
 
-  p{
+.subs {
      max-width: 350px;
      font-size: 14px;
      margin-top: 10px;

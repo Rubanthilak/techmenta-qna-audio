@@ -14,20 +14,13 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
-    didAutoLogout() {
-      return this.$store.getters.didAutoLogout;
-    },
   },
-  created() {
-    this.$store.dispatch("tryAutoLogin");
+  beforeCreate() {
+    this.$store.getters.firebaseAuth.onAuthStateChanged((user) => {
+      this.$store.dispatch("fetchUser", user);
+    });
   },
-  watch: {
-    didAutoLogout(curValue, oldValue) {
-      if (curValue && curValue !== oldValue) {
-        this.$router.replace("/auth");
-      }
-    },
-  },
+  
 };
 </script>
 
@@ -37,8 +30,8 @@ export default {
 :root {
   --blue: #384cfc;
   --green: #01e64d;
-  --red: #d41a23;
-  --orange: #f16c13;
+  --red: #fd4d4d;
+  --orange: #fd6868;
 
   --font: "Poppins", sans-serif;
 

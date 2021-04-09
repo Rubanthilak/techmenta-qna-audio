@@ -1,8 +1,8 @@
 export default {
     isAuthenticated(state) {
-        return state.token ? true : false;
+        return state.user.loggedIn;
     },
-    didAutoLogout(state){
-        return state.didAutoLogout;
+    user(state){
+        return state.user
     }
 }

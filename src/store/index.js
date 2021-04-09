@@ -10,11 +10,18 @@ const store = createStore({
     },
     state : {
         firestore : firebase.db,
-        storage: firebase.storage,
+        firebaseStorage: firebase.storage,
+        firebaseAuth: firebase.auth
     },
     getters : {
         firestore (state) {
             return state.firestore;
+        },
+        firebaseStorage (state) {
+            return state.firebaseStorage;
+        },
+        firebaseAuth (state) {
+            return state.firebaseAuth;
         }
     }
 });
