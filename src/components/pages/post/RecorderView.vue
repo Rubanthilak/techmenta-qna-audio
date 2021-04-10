@@ -1,7 +1,6 @@
 <template>
     <div>
-      <audio v-if="newAudio" :src="newAudioURL" controls></audio>
-      <button v-if="!recorder" @click="record()">Record</button>
+      <button v-if="!recorder" @click="record()">Add Audio</button>
       <button v-else @click="stop()">Stop</button>
     </div>
 </template>
@@ -39,9 +38,11 @@ export default {
 
       this.recorder.addEventListener("stop", () => {
         this.newAudio = new Blob(recorderChunks);
+        this.$emit("finish",this.newAudio);
       });
 
       this.recorder.start();
+      this.$emit("start");
     },
 
     async stop() {
@@ -59,10 +60,5 @@ h2{
     margin-bottom: 10px;
 }
 
-audio{
-    margin-bottom: 25px;
-    outline: none;
-    border: none;
-}
 
 </style>
