@@ -7,11 +7,18 @@
           <span>Terms of Service</span>.
       </p>
       <form @submit.prevent="validateCredentials" class="login-form flex">
-        <input type="text" v-model="username" placeholder="Username"/>
-        <input type="email" v-model="email" placeholder="Email"/>
-        <input type="password" v-model="password" placeholder="Password"/>
+        <input type="text" v-model="username" placeholder="Username" required/>
+        <input type="email" v-model="email" placeholder="Email" required/>
+        <input type="password" v-model="password" placeholder="Password" required/>
         <p class="error-msg" v-if="errorMessage">{{errorMessage}}</p>
-        <button type="submit">Signup</button>
+        <button type="submit" v-if="!isloading">Signup</button>
+        <button v-if="isloading">
+          <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+        </button>
       </form>
     </div>
   </div>
@@ -24,12 +31,14 @@ export default {
       email: null,
       username: null,
       password: null,
-      errorMessage: null
+      errorMessage: null,
+      isloading: null
     };
   },
   methods: {
     async validateCredentials() {
       if (this.email && this.password && this.username) {
+        this.isloading = true;
         try{
            await this.$store.dispatch(
             "signup",
@@ -44,6 +53,7 @@ export default {
         catch(err){
           this.errorMessage = err.message;
         }
+        this.isloading = false;
       }
     },
   },

@@ -3,14 +3,22 @@
     <div class="card">
       <h2>Welcome</h2>
       <p class="subs">
-          By logging in you accept our <span>Privacy Policy</span> and 
-          <span>Terms of Service</span>.
+        By logging in you accept our
+        <span>Privacy Policy</span> and
+        <span>Terms of Service</span>.
       </p>
       <form @submit.prevent="validateCredentials" class="login-form flex">
-        <input type="email" v-model="email" placeholder="Email"/>
-        <input type="password" v-model="password" placeholder="Password"/>
+        <input type="email" v-model="email" placeholder="Email" />
+        <input type="password" v-model="password" placeholder="Password" />
         <p class="error-msg" v-if="errorMessage">{{errorMessage}}</p>
-        <button type="submit">Login</button>
+        <button type="submit" v-if="!isloading">Login</button>
+        <button v-if="isloading">
+          <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+        </button>
       </form>
     </div>
   </div>
@@ -22,25 +30,24 @@ export default {
     return {
       email: null,
       password: null,
-      errorMessage: null
+      errorMessage: null,
+      isloading: false,
     };
   },
   methods: {
     async validateCredentials() {
       if (this.email && this.password) {
-        try{
-           await this.$store.dispatch(
-            "login",
-            {
+        this.isloading = true;
+        try {
+          await this.$store.dispatch("login", {
             email: this.email,
             password: this.password,
-            }
-          );
+          });
           this.$router.replace("/");
-        }
-        catch(err){
+        } catch (err) {
           this.errorMessage = err.message;
         }
+        this.isloading = false;
       }
     },
   },
@@ -48,16 +55,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.error-msg{
+.error-msg {
   color: var(--red);
   margin-top: 0px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   max-width: 350px;
   font-size: 12px;
 }
 
-.container{
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,14 +76,14 @@ export default {
   display: inline-block;
   border-radius: 8px;
 
-.subs {
-     max-width: 350px;
-     font-size: 14px;
-     margin-top: 10px;
+  .subs {
+    max-width: 350px;
+    font-size: 14px;
+    margin-top: 10px;
 
-     span{
-         font-weight: var(--bold);
-     }
+    span {
+      font-weight: var(--bold);
+    }
   }
 }
 
@@ -99,4 +105,5 @@ export default {
     font-weight: var(--medium);
   }
 }
+
 </style>

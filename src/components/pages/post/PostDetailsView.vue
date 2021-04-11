@@ -15,28 +15,42 @@
       <h3>Answers</h3>
       <hr />
       <div v-for="ans in answerList" :key="ans.id" class="answer">
-        <p><span>{{ans.username}}</span></p>
+        <p>
+          <span>{{ans.username}}</span>
+        </p>
         <p>{{ans.text}}</p>
         <audio :src="ans.audioURL" v-if="ans.audioURL" controls></audio>
         <p>
-          answered <span>{{formatDate(ans.timestamp)}}</span>
+          answered
+          <span>{{formatDate(ans.timestamp)}}</span>
         </p>
       </div>
     </section>
     <section class="ans-wrapper flex">
       <h3>Your Answer</h3>
-      <textarea cols="100" rows="10" v-model="answer"></textarea>
-      <div v-if="newAudio" class="flex audio-wrapper">
-        <audio :src="newAudioURL" controls></audio>
-        <button @click="setNewAudio(null)">Remove</button>
+      <div v-if="!isloading">
+        <textarea cols="100" rows="10" v-model="answer"></textarea>
+        <div v-if="newAudio" class="flex audio-wrapper">
+          <audio :src="newAudioURL" controls></audio>
+          <button @click="setNewAudio(null)">Remove</button>
+        </div>
+        <div v-if="recording" class="record-anime">
+          <p>Recording ...</p>
+        </div>
+        <div class="flex button-container">
+          <recorder-view @finish="setNewAudio" @start="startRecording"></recorder-view>
+          <button @click="validateForm" v-if="!recording && !loading">Post Your Answer</button>
+        </div>
       </div>
-      <div v-if="recording" class="record-anime">
-        <p>Recording ...</p>
-      </div>
-      <div class="flex button-container">
-        <recorder-view @finish="setNewAudio" @start="startRecording"></recorder-view>
-        <button @click="validateForm" v-if="!recording && !loading">Post Your Answer</button>
-        <p v-if="loading">Uploading...</p>
+      <div style="margin-top:25px" v-else>
+        <div class="sk-chase">
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+        </div>
       </div>
     </section>
   </div>
@@ -51,7 +65,7 @@ export default {
       recording: false,
       answer: null,
       answerList: null,
-      loading: false
+      isloading: false,
     };
   },
   computed: {
@@ -69,7 +83,7 @@ export default {
   },
   methods: {
     formatDate(date) {
-      if(!date){
+      if (!date) {
         return;
       }
       const months = [
@@ -118,8 +132,7 @@ export default {
       const { id: answerId } = this.answersCollection.doc();
 
       if (this.answer) {
-
-        this.loading = true;
+        this.isloading = true;
 
         if (this.newAudio) {
           const storageRef = this.$store.getters.firebaseStorage
@@ -140,7 +153,7 @@ export default {
 
         this.answer = "";
         this.newAudio = null;
-        this.loading = false;
+        this.isloading = false;
       }
     },
   },
@@ -168,7 +181,8 @@ export default {
 
 <style lang="scss" scoped>
 .button-container {
-  button,p {
+  button,
+  p {
     margin-left: 10px;
   }
 }
@@ -238,5 +252,91 @@ textarea {
     margin: 10px 0px;
   }
   margin-bottom: 10px;
+}
+
+.sk-chase {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  animation: sk-chase 2.5s infinite linear both;
+}
+
+.sk-chase-dot {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: sk-chase-dot 2s infinite ease-in-out both;
+}
+
+.sk-chase-dot:before {
+  content: "";
+  display: block;
+  width: 25%;
+  height: 25%;
+  background-color: #fff;
+  border-radius: 100%;
+  animation: sk-chase-dot-before 2s infinite ease-in-out both;
+}
+
+.sk-chase-dot:nth-child(1) {
+  animation-delay: -1.1s;
+}
+.sk-chase-dot:nth-child(2) {
+  animation-delay: -1s;
+}
+.sk-chase-dot:nth-child(3) {
+  animation-delay: -0.9s;
+}
+.sk-chase-dot:nth-child(4) {
+  animation-delay: -0.8s;
+}
+.sk-chase-dot:nth-child(5) {
+  animation-delay: -0.7s;
+}
+.sk-chase-dot:nth-child(6) {
+  animation-delay: -0.6s;
+}
+.sk-chase-dot:nth-child(1):before {
+  animation-delay: -1.1s;
+}
+.sk-chase-dot:nth-child(2):before {
+  animation-delay: -1s;
+}
+.sk-chase-dot:nth-child(3):before {
+  animation-delay: -0.9s;
+}
+.sk-chase-dot:nth-child(4):before {
+  animation-delay: -0.8s;
+}
+.sk-chase-dot:nth-child(5):before {
+  animation-delay: -0.7s;
+}
+.sk-chase-dot:nth-child(6):before {
+  animation-delay: -0.6s;
+}
+
+@keyframes sk-chase {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sk-chase-dot {
+  80%,
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sk-chase-dot-before {
+  50% {
+    transform: scale(0.4);
+  }
+  100%,
+  0% {
+    transform: scale(1);
+  }
 }
 </style>

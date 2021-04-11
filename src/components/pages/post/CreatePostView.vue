@@ -9,7 +9,15 @@
         <textarea cols="30" rows="10" v-model="desc"></textarea>
         <p>Tags (i.e: html,css,js)</p>
         <input type="text" v-model="tags" />
-        <button type="submit">Post</button>
+        <p class="error-msg" v-if="errorMessage">{{errorMessage}}</p>
+        <button type="submit" v-if="!isloading">Post</button>
+        <button v-if="isloading">
+          <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+        </button>
       </form>
     </div>
   </div>
@@ -22,11 +30,14 @@ export default {
       title: null,
       desc: null,
       tags: null,
+      isloading: false,
+      errorMessage: null,
     };
   },
   methods: {
     validatePost() {
       if (this.title && this.desc && this.tags) {
+        this.isloading = true;
         this.$store.getters.firestore
           .collection("posts")
           .add({
@@ -36,13 +47,15 @@ export default {
             tags: this.tags.split(","),
             totalVotes: 0,
             username: this.$store.getters.getUserData.displayName,
-            userid: this.$store.getters.getUserData.uid
+            userid: this.$store.getters.getUserData.uid,
           })
           .then((docRef) => {
-            this.$router.replace('/post/'+ docRef.id)
+            this.$router.replace("/post/" + docRef.id);
+            this.isloading = false;
           })
           .catch((error) => {
-            console.error("Error adding document: ", error);
+            this.errorMessage = error;
+            this.isloading = false;
           });
       }
     },
@@ -63,6 +76,14 @@ export default {
   flex-direction: column;
 }
 
+.error-msg {
+  color: var(--red);
+  margin-top: 0px;
+  margin-bottom: 10px;
+  max-width: 350px;
+  font-size: 12px;
+}
+
 input,
 textarea {
   margin-bottom: 25px;
@@ -74,6 +95,6 @@ textarea {
   color: var(--primary-color-100);
   font-family: var(--font);
   font-weight: var(--medium);
-  resize: none
+  resize: none;
 }
 </style>
