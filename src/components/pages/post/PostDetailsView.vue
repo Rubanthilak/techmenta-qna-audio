@@ -39,7 +39,7 @@
         </div>
         <div class="flex button-container">
           <recorder-view @finish="setNewAudio" @start="startRecording"></recorder-view>
-          <button @click="validateForm" v-if="!recording && !loading">Post Your Answer</button>
+          <button @click="validateForm" v-if="!recording && !isloading">Post Your Answer</button>
         </div>
       </div>
       <div style="margin-top:25px" v-else>
