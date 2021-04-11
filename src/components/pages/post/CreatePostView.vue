@@ -39,7 +39,7 @@ export default {
             userid: this.$store.getters.getUserData.uid
           })
           .then((docRef) => {
-            console.log(docRef.path);
+            this.$router.replace('/post/'+ docRef.id)
           })
           .catch((error) => {
             console.error("Error adding document: ", error);
@@ -74,5 +74,6 @@ textarea {
   color: var(--primary-color-100);
   font-family: var(--font);
   font-weight: var(--medium);
+  resize: none
 }
 </style>

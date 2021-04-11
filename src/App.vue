@@ -15,7 +15,7 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
   },
-  beforeCreate() {
+  mounted() {
     this.$store.getters.firebaseAuth.onAuthStateChanged((user) => {
       this.$store.dispatch("fetchUser", user);
     });

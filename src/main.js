@@ -24,9 +24,9 @@ import MainColumnGrid from "./components/layout/MainColumnGrid";
 
 const app = createApp(App);
 
-app.use(router);
 app.use(store);
-app.use(firestorePlugin)
+app.use(router);
+app.use(firestorePlugin);
 
 //Components
 app.component("top-bar",TopBar);

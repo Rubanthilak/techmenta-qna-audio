@@ -8,3 +8,7 @@
       </template>
     </main-col-grid>
 </template>
+
+<script>
+export default {}
+</script>
