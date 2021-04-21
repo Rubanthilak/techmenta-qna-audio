@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-bottom:50px">
     <h1>Ask a public question</h1>
     <div class="card">
       <form @submit.prevent="validatePost" class="form">
@@ -7,8 +7,10 @@
         <input type="text" v-model="title" />
         <p>Description</p>
         <textarea cols="30" rows="10" v-model="desc"></textarea>
-        <p>Tags (i.e: html,css,js)</p>
+        <p>Tags (i.e: gke-autopilot, kubernetes, cloud-code)</p>
         <input type="text" v-model="tags" />
+        <p>Language Preferred (i.e: English, Hindi, French)</p>
+        <input type="text" v-model="preferredLang" />
         <p class="error-msg" v-if="errorMessage">{{errorMessage}}</p>
         <button type="submit" v-if="!isloading">Post</button>
         <button v-if="isloading">
@@ -25,13 +27,14 @@
 
 <script>
 export default {
-  data() {
+   data() {
     return {
       title: null,
       desc: null,
       tags: null,
       isloading: false,
       errorMessage: null,
+      preferredLang : null
     };
   },
   methods: {
@@ -44,10 +47,10 @@ export default {
             title: this.title,
             desc: this.desc,
             timestamp: this.$store.getters.firebase.firestore.FieldValue.serverTimestamp(),
-            tags: this.tags.split(","),
-            totalVotes: 0,
+            tags: this.tags.replace(" ","").split(","),
             username: this.$store.getters.getUserData.displayName,
             userid: this.$store.getters.getUserData.uid,
+            preferredLang : this.preferredLang.replace(" ","").split(",")
           })
           .then((docRef) => {
             this.$router.replace("/post/" + docRef.id);
@@ -57,6 +60,9 @@ export default {
             this.errorMessage = error;
             this.isloading = false;
           });
+      }
+      else{
+        this.errorMessage = "Please fill all the fields*";
       }
     },
   },

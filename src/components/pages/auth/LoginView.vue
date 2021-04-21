@@ -21,6 +21,9 @@
         </button>
       </form>
     </div>
+    <div class="container" style="height:auto;margin-top:10px;">
+      <p style="font-size:14px">Don't have a account ? <router-link to="/signup" style="color: var(--accent-color-900);font-weight:var(--semibold)" >Sign up</router-link></p>
+    </div>
   </div>
 </template>
 
@@ -68,6 +71,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: calc(100vh - 100px);
+  flex-direction: column;
 }
 
 .card {
@@ -105,5 +109,4 @@ export default {
     font-weight: var(--medium);
   }
 }
-
 </style>

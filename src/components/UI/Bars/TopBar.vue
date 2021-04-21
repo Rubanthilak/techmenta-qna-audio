@@ -2,10 +2,12 @@
   <div class="nav-bar">
     <div class="container grid">
       <div class="logo-wrapper">
-        <h1 class="logo">TechMentā</h1>
+        <router-link to="/">
+           <h1 class="logo">TechMentā</h1>
+        </router-link>
       </div>
       <div class="search-wrapper">
-        <input type="text" class="search-bar" placeholder="Search for mentors or questions">
+        <input type="text" class="search-bar" placeholder="Search for questions or answers using tags" v-on:keyup.enter="search" v-model="searchKeyword">
       </div>
       <div class="links-wrapper">
         <button @click="logout">Log out</button>
@@ -16,6 +18,11 @@
 
 <script>
 export default {
+  data(){
+    return {
+      searchKeyword:null
+    }
+  },
   methods : {
     async logout(){
       try{
@@ -24,6 +31,13 @@ export default {
       }
       catch(err){
         console.log(err);
+      }
+    },
+    async search(){
+      try {
+        await this.$store.dispatch("feed/fetchFeedListByTag",this.searchKeyword.replace(/  +/g, ' ').replaceAll(" ","-"));
+      } catch (error) {
+        console.log(error);
       }
     }
   },
@@ -41,7 +55,7 @@ export default {
   .grid {
     display: grid;
     grid-column-gap: 30px;
-    grid-template-columns: 200px auto 300px;
+    grid-template-columns: 200px auto 100px;
   }
 }
 

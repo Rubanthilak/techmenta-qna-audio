@@ -16,7 +16,7 @@
 .grid-container {
   display: grid;
   grid-column-gap: 30px;
-  grid-template-columns: 200px auto 300px;
+  grid-template-columns: 200px auto 100px;
 }
 
 </style>

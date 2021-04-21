@@ -3,8 +3,11 @@
     <div class="topic-wrapper">
       <div class="topic-container" v-for="topic in topicList" :key="topic">
         <p class="topic">{{topic.title}}</p>
-        <div v-for="link in topic.links" :key="link">
-          <p class="link">{{link}}</p>
+        <div v-for="link in topic.links" :key="link.key">
+          <p
+            class="link"
+            @click="$store.dispatch('feed/fetchFeedListByTag',link.key)"
+          >{{link.value}}</p>
         </div>
       </div>
     </div>
@@ -17,21 +20,43 @@ export default {
     return {
       topicList: [
         {
-          title: "HTML and CSS",
-          links: ["HTML", "CSS", "Bootstrap", "Bulma", "Tailwind CSS"],
+          title: "Cloud",
+          links: [
+            { value: "GKE Autopilot", key: ["gke-autopilot","gke","google-kubernetes-engine","google-cloud-platform"] },
+            { value: "Cloud Code", key: ["cloud-code"] },
+            { value: "Docker", key: ["docker","container"] },
+            { value: "Kubernetes", key: ["kubernetes"] },
+          ],
         },
         {
-          title: "JavaScript",
-          links: ["jQuery", "React", "Angular", "Vue", "JSON", "AJAX"],
+          title: "Machine Learning",
+          links: [
+            { value: "Python", key: ["python"] },
+            { value: "Jupyter Notebooks", key: ["jupyter-notebook"] },
+            { value: "Scikit Learn", key: ["scikit-learn"] },
+            { value: "OpenCV", key: ["opencv"] },
+          ],
         },
         {
-          title: "Server Side",
-          links: ["SQL", "PHP", "Node.js", "Raspberry Pi"],
+          title: "Javascript",
+          links: [
+            { value: "Angular", key: ["angular"] },
+            { value: "React", key: ["react"] },
+            { value: "Vue", key: ["vue"] },
+            { value: "Jquery", key: ["jquery"] },
+            { value: "Ember", key: ["ember"] },
+          ],
         },
         {
           title: "Programming",
-          links: ["Jave", "Python", "C++", "C#", "R"],
-        }
+          links: [
+            { value: "C#", key: ["c#"] },
+            { value: "C++", key: ["c++"] },
+            { value: "Java", key: ["java"] },
+            { value: "Ruby", key: ["ruby"] },
+            { value: "Go", key: ["go"] },
+          ],
+        },
       ],
     };
   },
@@ -39,7 +64,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .topic-wrapper {
   height: calc(100vh - 145px);
   overflow-x: hidden;
@@ -74,9 +98,9 @@ export default {
   position: relative;
   display: inline-block;
 
-  &::before{
+  &::before {
     position: absolute;
-    content : " ";
+    content: " ";
     height: 1px;
     width: 100%;
     background: var(--primary-color-200);
@@ -91,7 +115,7 @@ export default {
   padding: 2px 10px;
   transition: all 0.15s;
 
-  &:hover{
+  &:hover {
     background: var(--accent-color-900);
     color: var(--primary-color-100);
     border-radius: 3px;

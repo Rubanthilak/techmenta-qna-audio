@@ -10,6 +10,14 @@
       </p>
       <hr />
       <p>{{post.desc}}</p>
+      <div class="tags-wrapper flex" style="margin-top:25px">
+        <p class="tag" v-for="tag in post.tags" :key="tag">{{tag}}</p>
+      </div>
+      <hr />
+      <div class="tags-wrapper flex">
+        <p>Preferred Language : </p>
+        <p class="lang tag" v-for="lang in post.preferredLang" :key="lang">{{lang}}</p>
+      </div>
     </section>
     <section class="card" v-if="answerList.length > 0">
       <h3>Answers</h3>
@@ -184,6 +192,23 @@ export default {
   button,
   p {
     margin-left: 10px;
+  }
+}
+
+.tags-wrapper{
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 10px;
+  .tag{
+    background: var(--accent-color-900);
+    padding: 5px 10px;
+    font-size: 10px;
+    border-radius: 360px;
+  }
+  .lang{
+    color: var(--accent-color-900);
+    background: white;
+    font-weight: var(--semibold);
   }
 }
 

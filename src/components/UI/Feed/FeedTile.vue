@@ -12,8 +12,10 @@
         </p>
       </div>
       <div class="divider">|</div>
-      <div>
-        <p><span>{{tileData.totalVotes}}</span> Votes</p>
+      <div class="flex">
+        <p><span>Tags</span></p>
+        <p class="tag">{{tileData.tags[0]}}</p>
+        <p class="tag" v-if="tileData.tags[1]">{{tileData.tags[1]}}</p>
       </div>
     </div>
   </div>
@@ -43,6 +45,15 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease-in;
   margin: 10px 0px;
+
+  .tag{
+    background: var(--accent-color-900);
+    color: white !important;
+    font-size: 10px !important;
+    padding: 2px 10px;
+    border-radius: 360px;
+    margin-left: 10px;
+  }
 
   &:hover {
     background: var(--primary-color-600);
