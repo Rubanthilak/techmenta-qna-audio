@@ -4,6 +4,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyDrtGGTF-z7nvjV7HkDE_nv2lB66_rXgkw",
     authDomain: "techmenta-site.firebaseapp.com",
