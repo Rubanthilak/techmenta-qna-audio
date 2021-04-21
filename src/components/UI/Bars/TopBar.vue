@@ -35,7 +35,7 @@ export default {
     },
     async search(){
       try {
-        await this.$store.dispatch("feed/fetchFeedListByTag",this.searchKeyword.replace(/  +/g, ' ').replaceAll(" ","-"));
+        await this.$store.dispatch("feed/fetchFeedListByTag",[this.searchKeyword.replace(/  +/g, ' ').replaceAll(" ","-")]);
       } catch (error) {
         console.log(error);
       }
