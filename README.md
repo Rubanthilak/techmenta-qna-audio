@@ -1,4 +1,6 @@
-# techmenta
+# techmenta.co
+
+Check it out @ https://techmenta-site.web.app/
 
 ## Project setup
 ```
