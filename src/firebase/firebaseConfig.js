@@ -6,13 +6,13 @@ import "firebase/storage";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDrtGGTF-z7nvjV7HkDE_nv2lB66_rXgkw",
+    apiKey: "dummy",
     authDomain: "techmenta-site.firebaseapp.com",
     projectId: "techmenta-site",
     storageBucket: "techmenta-site.appspot.com",
-    messagingSenderId: "313538870857",
-    appId: "1:313538870857:web:afe7ee19b695641b534998",
-    measurementId: "G-NSCNJHKJF9"
+    messagingSenderId: "dumy",
+    appId: "dummy",
+    measurementId: "dummy"
 };
 
 firebase.initializeApp(firebaseConfig);
